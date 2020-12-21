@@ -3,9 +3,9 @@
 
  python manage.py runserver
 
-<img src="/a.png" alt=""/>
-<img src="/b.png" alt=""/>
-<img src="/c.png" alt=""/>
-<img src="/d.png" alt=""/>
-<img src="/e.png" alt=""/>
+<img src="ex/a.png" alt=""/>
+<img src="ex/b.png" alt=""/>
+<img src="ex/c.png" alt=""/>
+<img src="ex/d.png" alt=""/>
+<img src="ex/e.png" alt=""/>
 
