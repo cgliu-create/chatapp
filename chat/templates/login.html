@@ -1,0 +1,151 @@
+{% extends "root.html" %}
+
+{% block external %}
+  {% load static %}
+  <link rel="stylesheet" href="{%static '/css/form.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="form">
+  <ul class="tab-group">
+    <li class="tab"><a class="pinkblock" href="#signup">Sign Up</a></li>
+    <li class="tab"><a class="orangeblock" href="#login">Sign In</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="signup">   
+      <h1>Sign Up</h1>
+      <form action="{% url 'signup' %}" method="post">
+        {% csrf_token %}
+        <div class="top-row">
+          <div class="field-wrap">
+            <label for="id_first_name">
+              First Name<span class="req">*</span>
+            </label>
+            <input type="text" name="first_name" maxlength="100" id="id_first_name" class="borderpink" required autocomplete="off" />
+          </div>
+          <div class="field-wrap">
+            <label for="id_last_name">
+              Last Name<span class="req">*</span>
+            </label>
+            <input type="text" name="last_name" maxlength="100" id="id_last_name" class="borderpink" required autocomplete="off"/>
+          </div>
+        </div>
+        <div class="field-wrap">
+          <label for="id_email">
+            Email Address<span class="req">*</span>
+          </label>
+          <input type="email" name="email" maxlength="260" id="id_email" class="borderpink" required autocomplete="off"/>
+        </div>
+        <div class="field-wrap">
+          <label for="id_password1">
+            Password<span class="req">*</span>
+          </label>
+          <input type="password" name="password1" id="id_password1" class="borderpink" required autocomplete="off"/>
+        </div>
+        <div class="field-wrap">
+          <label for="id_password2">
+            Confirm Password<span class="req">*</span>
+          </label>
+          <input type="password" name="password2" id="id_password2" class="borderpink" required autocomplete="off"/>
+        </div>
+        <button type="submit" class="pinkblock button button-block">Get Started</button>
+      </form>
+    </div>
+    <div id="login">   
+      <h1>Welcome Back!</h1>
+      <form action="{% url 'signin' %}" method="post">
+        {% csrf_token %}
+        <div class="field-wrap">
+          <label>
+            Email Address<span class="req">*</span>
+          </label>
+          <input name="email" class="borderorange" type="email" required autocomplete="off"/>
+        </div>
+        <div class="field-wrap">
+          <label>
+            Password<span class="req">*</span>
+          </label>
+          <input name="password" class="borderorange" type="password" required autocomplete="off"/>
+        </div>
+        <p class="forgot"><a href="#">Forgot Password?</a></p>
+        <button class="orangeblock button button-block">Log In</button>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  $('.form').find('input').on('keyup blur focus', function (e) {
+    
+    var $this = $(this),
+        label = $this.prev('label');
+  
+      if (e.type === 'keyup') {
+        if ($this.val() === '') {
+            label.removeClass('active50 active highlight');
+          } else {
+            label.addClass('active50 active highlight');
+          }
+      } else if (e.type === 'blur') {
+        if( $this.val() === '' ) {
+          label.removeClass('active50 active highlight'); 
+        } else {
+          label.removeClass('highlight');   
+        }   
+      } else if (e.type === 'focus') {
+        
+        if( $this.val() === '' ) {
+          label.removeClass('highlight'); 
+        } 
+        else if( $this.val() !== '' ) {
+          label.addClass('highlight');
+        }
+      }
+  });
+  
+  $('.form').find('textarea').on('keyup blur focus', function (e) {
+    
+    var $this = $(this),
+        label = $this.prev('label');
+  
+      if (e.type === 'keyup') {
+        if ($this.val() === '') {
+            label.removeClass('active300 active highlight');
+          } else {
+            label.addClass('active300 active highlight');
+          }
+      } else if (e.type === 'blur') {
+        if( $this.val() === '' ) {
+          label.removeClass('active300 active highlight'); 
+        } else {
+          label.removeClass('highlight');   
+        }   
+      } else if (e.type === 'focus') {
+        
+        if( $this.val() === '' ) {
+          label.removeClass('highlight'); 
+        } 
+        else if( $this.val() !== '' ) {
+          label.addClass('highlight');
+        }
+      }
+  });
+  
+  $('.tab a').on('click', function (e) {
+    
+    e.preventDefault();
+    
+    $(this).parent().addClass('active');
+    $(this).parent().siblings().removeClass('active');
+    
+    target = $(this).attr('href');
+  
+    $('.tab-content > div').not(target).hide();
+    
+    $(target).fadeIn(600);
+    
+  });
+</script>
+{% endblock %}
+
+

@@ -1,0 +1,43 @@
+{% extends "root.html" %}
+
+{% block external %}
+  {% load static %}
+  <link rel="stylesheet" href="{%static '/css/title.css' %}">
+  <script>
+    function toggleShow(){
+      let element = document.getElementById('thebutton'); 
+      let elementb = document.getElementById('theimage'); 
+      if (element == null){ return}
+      if (element.style.display == 'none'){
+        element.style.display = 'block'
+        elementb.style.display = 'none' 
+      } else {
+        element.style.display = 'none'
+        elementb.style.display = 'block'
+      }
+    }
+  </script>
+{% endblock %}
+
+{% block content %}
+<input type="checkbox" onmousedown="toggleShow()"/>
+<div>
+    <h1>
+        {% if mainmessage %}
+            <p>{{ mainmessage }}</p>
+        {% endif %}
+        {% if form.errors %} 
+            {% for error in form.errors %}
+                <p>{{ error }}</p>
+            {% endfor %} 
+        {% endif %}
+        <p>
+            <a href="{% url 'sign' %}" style="display: none;" id="thebutton">Let's chat</a>
+        </p>
+        <p>
+          {% load static %}
+          <img id="theimage" style="width: 100px; height: 100px;" src="{%static 'cat.png' %}" >
+        </p>
+    </h1>
+</div>
+{% endblock %}

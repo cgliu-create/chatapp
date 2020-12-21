@@ -1,0 +1,100 @@
+{% extends "root.html" %}
+
+{% block external %}
+  {% load static %}
+  <link rel="stylesheet" href="{%static '/css/form.css' %}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="form">
+    <div id="room">   
+      <h1> Welcome  
+        {{ request.user.first_name }}
+        {{ request.user.last_name }} 
+      </h1>
+      <form action="{% url 'room' %}" method="post">
+        {% csrf_token %}
+          <div class="field-wrap">
+            <label for="id_room_name">
+              Room Name<span class="req">*</span>
+            </label>
+            <input type="text" name="room_name" maxlength="100" id="id_room_name" class="borderpink" required autocomplete="off" />
+          </div>
+        <button type="submit" class="pinkblock button button-block">Start Chatting</button>
+      </form>
+    </div>
+</div>
+<script>
+  $('.form').find('input').on('keyup blur focus', function (e) {
+    
+    var $this = $(this),
+        label = $this.prev('label');
+  
+      if (e.type === 'keyup') {
+        if ($this.val() === '') {
+            label.removeClass('active50 active highlight');
+          } else {
+            label.addClass('active50 active highlight');
+          }
+      } else if (e.type === 'blur') {
+        if( $this.val() === '' ) {
+          label.removeClass('active50 active highlight'); 
+        } else {
+          label.removeClass('highlight');   
+        }   
+      } else if (e.type === 'focus') {
+        
+        if( $this.val() === '' ) {
+          label.removeClass('highlight'); 
+        } 
+        else if( $this.val() !== '' ) {
+          label.addClass('highlight');
+        }
+      }
+  });
+  
+  $('.form').find('textarea').on('keyup blur focus', function (e) {
+    
+    var $this = $(this),
+        label = $this.prev('label');
+  
+      if (e.type === 'keyup') {
+        if ($this.val() === '') {
+            label.removeClass('active300 active highlight');
+          } else {
+            label.addClass('active300 active highlight');
+          }
+      } else if (e.type === 'blur') {
+        if( $this.val() === '' ) {
+          label.removeClass('active300 active highlight'); 
+        } else {
+          label.removeClass('highlight');   
+        }   
+      } else if (e.type === 'focus') {
+        
+        if( $this.val() === '' ) {
+          label.removeClass('highlight'); 
+        } 
+        else if( $this.val() !== '' ) {
+          label.addClass('highlight');
+        }
+      }
+  });
+  
+  $('.tab a').on('click', function (e) {
+    
+    e.preventDefault();
+    
+    $(this).parent().addClass('active');
+    $(this).parent().siblings().removeClass('active');
+    
+    target = $(this).attr('href');
+  
+    $('.tab-content > div').not(target).hide();
+    
+    $(target).fadeIn(600);
+    
+  });
+</script>
+{% endblock %}
