@@ -7,5 +7,4 @@
 <img src="ex/b.png" alt=""/>
 <img src="ex/c.png" alt=""/>
 <img src="ex/d.png" alt=""/>
-<img src="ex/e.png" alt=""/>
 
